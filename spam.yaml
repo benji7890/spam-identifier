@@ -34,7 +34,6 @@ Resources:
     Type: 'AWS::SES::ReceiptRule' 
     Properties: 
       Rule: 
-        - String Actions: 
         - S3Action:
             BucketName: 'spam-email-ben'
             Enabled: true 
