@@ -62,6 +62,6 @@ Resources:
       AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
       MaxSessionDuration: 3600
       ManagedPolicyArns:
-#         - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
-#         - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AmazonSageMaker-ExecutionPolicy-20210427T220560"
-#       Description: "SageMaker execution role created from the SageMaker AWS Management Console."
+        - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AmazonSageMaker-ExecutionPolicy-20210427T220560"
+      Description: "SageMaker execution role created from the SageMaker AWS Management Console."
