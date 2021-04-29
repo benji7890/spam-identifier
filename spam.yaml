@@ -3,20 +3,10 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 
 Resources:
-  MySESDomain:
-    Type: Custom::SES_Domain
+  Route53HostedZone:
+    Type: "AWS::Route53::HostedZone"
     Properties:
-      # ServiceToken is the Arn of a Lambda Function from the nested stack:
-      ServiceToken: !GetAtt spamfilter.Arn
-      # Remaining Properties are options for provisioning for your SES domain identity:
-      # (Domain is required; all others are optional and shown with their defaults)
-      Domain: "him.com"
-      EnableSend: true
-      EnableReceive: true
-      MailFromSubdomain: "mail"
-      TTL: "1800"
-      CustomDMARC: '"v=DMARC1; p=none; pct=100; sp=none; aspf=r;"'
-      Region: !Ref "AWS::Region"
+      Name: "teo.net"
       
   S3BucketEmail:
       Type: "AWS::S3::Bucket"
