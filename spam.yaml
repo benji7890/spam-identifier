@@ -7,7 +7,7 @@ Resources:
   S3BucketEmail:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: 'spam-email-hw'
+        BucketName: 'spam-email-ben'
         
   S3BucketSagemaker:
       Type: "AWS::S3::Bucket"
