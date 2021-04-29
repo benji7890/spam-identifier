@@ -26,7 +26,22 @@ Resources:
       Layers:
         - !Sub "arn:aws:lambda:${AWS::Region}:770693421928:layer:Klayers-python38-numpy:16"
       Role: !GetAtt IAMRole.Arn
-      
+  
+  SesRuleSet: 
+    Type: 'AWS::SES::ReceiptRuleSet' 
+    
+  SesRule: 
+    Type: 'AWS::SES::ReceiptRule' 
+    Properties: 
+      Rule: 
+        Recipients: 
+        - String Actions: 
+        - S3Action:
+            BucketName: 'spam-email-ben'
+            Enabled: true 
+            ScanEnabled: true 
+            RuleSetName: !Ref SesRuleSet
+                
   IAMRole:
     Type: "AWS::IAM::Role"
     Properties:
