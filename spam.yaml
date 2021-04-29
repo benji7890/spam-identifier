@@ -50,7 +50,7 @@ Resources:
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
         - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
-        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AWSLambdaBasicExecutionRole-09b7f432-6612-487d-9f2c-eea2d0f543f6"
+        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AWSLambdaBasicExecutionRole-6bbdce0d-0c45-4fdb-9f36-b0756a3eaa0b"
 
   IAMRole2:
     Type: "AWS::IAM::Role"
