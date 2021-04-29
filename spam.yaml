@@ -2,15 +2,15 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 Resources:
-#   S3Bucket:
-#       Type: "AWS::S3::Bucket"
-#       Properties:
-#         BucketName: "spam-filter-stack"
-#         NotificationConfiguration:
-#           LambdaConfigurations:
-#             -
-#               Event: "s3:ObjectCreated:Put"
-#               Function: !GetAtt spamfilter.Arn
+  S3Bucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName: "spam-filter"
+        NotificationConfiguration:
+          LambdaConfigurations:
+            -
+              Event: "s3:ObjectCreated:Put"
+              Function: !GetAtt spamfilter.Arn
 
 #   S3BucketPolicy:
 #     Type: "AWS::S3::BucketPolicy"
