@@ -1,17 +1,29 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
+Parameters:
+  BucketName:
+  Description: 'spam-filter123'
+  Type: String
 Resources:
   S3Bucket:
       Type: "AWS::S3::Bucket"
+      DependsOn: BucketPermission
       Properties:
-        BucketName: "spam-filter123"
+        BucketName: !Ref BucketName
         NotificationConfiguration:
           LambdaConfigurations:
-            -
-              Event: "s3:ObjectCreated:Put"
+            - Event: "s3:ObjectCreated:*"
               Function: !GetAtt spamfilter.Arn
 
+  BucketPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !Ref spamfilter
+      Principal: s3.amazonaws.com
+      SourceAccount: !Ref "AWS::AccountId"
+      SourceArn: !Sub "arn:aws:s3:::${BucketName}"
 #   S3BucketPolicy:
 #     Type: "AWS::S3::BucketPolicy"
 #     Properties:
