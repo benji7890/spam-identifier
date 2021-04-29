@@ -27,15 +27,16 @@ Resources:
         - !Sub "arn:aws:lambda:${AWS::Region}:770693421928:layer:Klayers-python38-numpy:16"
       Role: !GetAtt IAMRole.Arn
   
-  SesRuleSet: 
-    Type: 'AWS::SES::ReceiptRuleSet' 
-  SesRule: 
-    Type: 'AWS::SES::ReceiptRule' 
-    Properties: 
-      Rule: Recipients: - String Actions: - S3Action:
-                  BucketName: 'spam-email-ben' Enabled: true ScanEnabled: true RuleSetName: !Ref
-                  SesRuleSet
-                
+  SageMakerNotebookInstance:
+    Type: "AWS::SageMaker::NotebookInstance"
+    Properties:
+      NotebookInstanceName: "spam-filter-notebook"
+      InstanceType: "ml.t2.medium"
+      RoleArn: !GetAtt IAMRole2.Arn
+      DirectInternetAccess: "Enabled"
+      VolumeSizeInGB: 5
+      RootAccess: "Enabled"
+      
   IAMRole:
     Type: "AWS::IAM::Role"
     Properties:
