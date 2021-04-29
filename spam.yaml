@@ -24,22 +24,6 @@ Resources:
       Principal: s3.amazonaws.com
       SourceAccount: !Ref "AWS::AccountId"
       SourceArn: !Sub "arn:aws:s3:::${BucketName}"
-#   S3BucketPolicy:
-#     Type: "AWS::S3::BucketPolicy"
-#     Properties:
-#       Bucket: !Ref S3Bucket
-#       PolicyDocument:
-#         Version: "2012-10-17"
-#         Id: "Policy1618946204393"
-#         Statement:
-#           -
-#             Sid: "Stmt1618946199827"
-#             Effect: "Allow"
-#             Principal: "*"
-#             Action:
-#               - "s3:GetObject"
-#               - "s3:PutObject"
-#             Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
 
   spamfilter:
     Type: 'AWS::Serverless::Function'
