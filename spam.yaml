@@ -12,7 +12,7 @@ Resources:
   S3BucketSagemaker:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: 'spam-email-hw'
+        BucketName: 'spam-sagemaker-hw'
 
   spamfilter:
     Type: 'AWS::Serverless::Function'
