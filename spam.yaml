@@ -34,10 +34,10 @@ Resources:
     Type: 'AWS::SES::ReceiptRule' 
     Properties: 
       Rule: 
-        - S3Action:
-            BucketName: 'spam-email-ben'
-            Enabled: true 
-            ScanEnabled: true 
+        S3Action:
+          BucketName: 'spam-email-ben'
+          Enabled: true 
+          ScanEnabled: true 
       RuleSetName: !Ref SesRuleSet
                 
   IAMRole:
