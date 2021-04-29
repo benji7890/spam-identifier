@@ -61,5 +61,5 @@ Resources:
       MaxSessionDuration: 3600
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
-        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AmazonSageMaker-ExecutionPolicy-20210410T103224"
+        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AmazonSageMaker-ExecutionPolicy-20210427T220560"
       Description: "SageMaker execution role created from the SageMaker AWS Management Console."
