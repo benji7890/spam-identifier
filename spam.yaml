@@ -7,7 +7,7 @@ Resources:
     Type: Custom::SES_Domain
     Properties:
       # ServiceToken is the Arn of a Lambda Function from the nested stack:
-      ServiceToken: !GetAtt spamfilter
+      ServiceToken: !GetAtt spamfilter.Arn
       # Remaining Properties are options for provisioning for your SES domain identity:
       # (Domain is required; all others are optional and shown with their defaults)
       Domain: "him.com"
