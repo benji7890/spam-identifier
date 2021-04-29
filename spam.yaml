@@ -10,7 +10,7 @@ Resources:
           LambdaConfigurations:
             -
               Event: "s3:ObjectCreated:Put"
-              Function: !GetAtt LambdaFunction.Arn
+              Function: !GetAtt spamfilter.Arn
 
   S3BucketPolicy:
     Type: "AWS::S3::BucketPolicy"
