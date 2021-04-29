@@ -2,6 +2,33 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 Resources:
+  S3Bucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName: "spam-filter-stack"
+        NotificationConfiguration:
+          LambdaConfigurations:
+            -
+              Event: "s3:ObjectCreated:Put"
+              Function: !GetAtt LambdaFunction.Arn
+
+  S3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Id: "Policy1618946204393"
+        Statement:
+          -
+            Sid: "Stmt1618946199827"
+            Effect: "Allow"
+            Principal: "*"
+            Action:
+              - "s3:GetObject"
+              - "s3:PutObject"
+            Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
+
   spamfilter:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -12,3 +39,27 @@ Resources:
       MemorySize: 128
       Timeout: 3
       Role: 'arn:aws:iam::380014966022:role/lambda-s3-role'
+      
+  IAMRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      Path: "/service-role/"
+      RoleName: "spam-filter-sagemaker-s3"
+      AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+      MaxSessionDuration: 3600
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AWSLambdaBasicExecutionRole-09b7f432-6612-487d-9f2c-eea2d0f543f6"
+
+  IAMRole2:
+    Type: "AWS::IAM::Role"
+    Properties:
+      Path: "/service-role/"
+      RoleName: "spam-filter-sagemaker"
+      AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+      MaxSessionDuration: 3600
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+        - !Sub "arn:aws:iam::${AWS::AccountId}:policy/service-role/AmazonSageMaker-ExecutionPolicy-20210410T103224"
+      Description: "SageMaker execution role created from the SageMaker AWS Management Console."
