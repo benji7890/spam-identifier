@@ -6,12 +6,12 @@ Resources:
   S3BucketEmail:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: 'spam-email-ben1'
+        BucketName: 'spam-email-ben'
         
   S3BucketSagemaker:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: 'spam-sagemaker-hw1'
+        BucketName: 'spam-sagemaker-hw'
 
   spamfilter:
     Type: 'AWS::Serverless::Function'
@@ -29,7 +29,7 @@ Resources:
   SageMakerNotebookInstance:
     Type: "AWS::SageMaker::NotebookInstance"
     Properties:
-      NotebookInstanceName: "spam-filter-notebook1"
+      NotebookInstanceName: "spam-filter-notebook"
       InstanceType: "ml.t2.medium"
       RoleArn: !GetAtt IAMRole2.Arn
       DirectInternetAccess: "Enabled"
